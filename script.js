@@ -6,7 +6,6 @@ function getProfile () {
     profileDiv.innerHTML = '<p>Please enter a GitHub username.</p>'
     return
   }
-
   fetch(`https://api.github.com/users/${username}`)
     .then(response => {
       if (!response.ok) {
@@ -37,12 +36,9 @@ function getProfile () {
         </div>
       `
     })
-
     .catch(error => {
       console.error(error)
       profileDiv.innerHTML = '<p>User not found. Please try again.</p>'
     })
-    
-}
-
-window.getProfile = getProfile
+  }
+  window.getProfile = getProfile
