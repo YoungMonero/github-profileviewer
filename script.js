@@ -40,5 +40,5 @@ function getProfile () {
       console.error(error)
       profileDiv.innerHTML = '<p>User not found. Please try again.</p>'
     })
-  }
-  window.getProfile = getProfile
+}
+window.getProfile = getProfile
