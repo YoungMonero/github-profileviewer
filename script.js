@@ -1,18 +1,19 @@
-function getProfile () {
-  const username = document.getElementById('username').value
-  const profileDiv = document.getElementById('profile')
+
+export function getProfile () {
+  const username = document.getElementById('username').value;
+  const profileDiv = document.getElementById('profile');
 
   if (!username) {
-    profileDiv.innerHTML = '<p>Please enter a GitHub username.</p>'
-    return
+    profileDiv.innerHTML = '<p>Please enter a GitHub username.</p>';
+    return;
   }
 
   fetch(`https://api.github.com/users/${username}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error('User not found')
+        throw new Error('User not found');
       }
-      return response.json()
+      return response.json();
     })
     .then(data => {
       profileDiv.innerHTML = `
@@ -35,9 +36,11 @@ function getProfile () {
           </div>
           <a href="${data.html_url}" target="_blank">View GitHub Profile</a>
         </div>
-      `
+      `;
     })
     .catch(error => {
-      profileDiv.innerHTML = '<p>User not found. Please try again.</p>'
-    })
+      // Properly handle/log the error
+      console.error('Error fetching profile:', error);
+      profileDiv.innerHTML = `<p>${error.message || 'User not found. Please try again.'}</p>`;
+    });
 }
